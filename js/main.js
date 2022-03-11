@@ -14,3 +14,9 @@ const deleteAllBtn = document.querySelector(".delete-all");
 
 const lightStyleBtn = document.querySelector(".light");
 const darkStyleBtn = document.querySelector(".dark");
+
+let root = document.documentElement;
+let ID = 0;
+let categoryIcon;
+let selectedCategory;
+let moneyArr = [0];
