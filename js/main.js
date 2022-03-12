@@ -26,7 +26,23 @@ const openPanel = () => {
 };
 const closePanel = () => {
 	addTransactionPanel.style.display = "none";
+	clearInputs();
+};
+
+const checkForm = () => {
+	if (nameInput.value !== "" && amountInput.value !== "" && categorySelect.value !== "none") {
+		console.log("ok");
+	} else {
+		alert("Wypełnij wszystkie pola!");
+	}
+};
+
+const clearInputs = () => {
+	nameInput.value = "";
+	amountInput.value = "";
+	categorySelect.selectedIndex = 0;
 };
 
 addTransactionBtn.addEventListener("click", openPanel);
 cancelBtn.addEventListener("click", closePanel);
+saveBtn.addEventListener("click", checkForm);
