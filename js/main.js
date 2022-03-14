@@ -56,8 +56,8 @@ const createNewTransaction = () => {
 	</p>
 	<p class="transaction-amount">
 	${amountInput.value}zł
-	<button class="delete" onclick='deleteTransaction(${ID})>
-	<i class="fas fa-times"></i>
+	<button class="delete" onclick='deleteTransaction(${ID})'>
+	<ion-icon name="close-circle"></ion-icon>
 	</button>
 	</p>
 `;
@@ -69,6 +69,7 @@ const createNewTransaction = () => {
 	}
 
 	moneyArr.push(parseFloat(amountInput.value));
+	countMoney(moneyArr);
 	closePanel();
 	ID++;
 	clearInputs();
@@ -95,6 +96,34 @@ const checkCategory = (transaction) => {
 	}
 };
 
+const countMoney = (money) => {
+	const newMoney = money.reduce((a, b) => a + b);
+	availableMoney.textContent = `${newMoney}zł`;
+};
+
+const deleteTransaction = (ID) => {
+	const transactionToDelete = document.getElementById(ID);
+	const transactionAmount = parseFloat(transactionToDelete.childNodes[3].innerText);
+	const indexOfTransaction = moneyArr.indexOf(transactionAmount);
+	moneyArr.splice(indexOfTransaction, 1);
+
+	if (transactionToDelete.classList.contains("income")) {
+		incomeSection.removeChild(transactionToDelete);
+	} else {
+		expensesSection.removeChild(transactionToDelete);
+	}
+
+	countMoney(moneyArr);
+};
+
+const deleteAllTransactions = () => {
+	incomeSection.innerHTML = `<h3>Przychód:</h3>`;
+	expensesSection.innerHTML = `<h3>Wydatki:</h3>`;
+	availableMoney.textContent = "0zł";
+	moneyArr = [0];
+};
+
 addTransactionBtn.addEventListener("click", openPanel);
 cancelBtn.addEventListener("click", closePanel);
 saveBtn.addEventListener("click", checkForm);
+deleteAllBtn.addEventListener("click", deleteAllTransactions);
