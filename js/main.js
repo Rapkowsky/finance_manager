@@ -31,7 +31,7 @@ const closePanel = () => {
 
 const checkForm = () => {
 	if (nameInput.value !== "" && amountInput.value !== "" && categorySelect.value !== "none") {
-		console.log("ok");
+		createNewTransaction();
 	} else {
 		alert("Wypełnij wszystkie pola!");
 	}
@@ -47,6 +47,8 @@ const createNewTransaction = () => {
 	const newTransaction = document.createElement("div");
 	newTransaction.classList.add("transaction");
 	newTransaction.setAttribute("id", ID);
+
+	checkCategory(selectedCategory);
 
 	newTransaction.innerHTML = `
 	<p class="transaction-name">
@@ -72,6 +74,26 @@ const createNewTransaction = () => {
 	clearInputs();
 };
 
+const selectCategory = () => {
+	selectedCategory = categorySelect.options[categorySelect.selectedIndex].text;
+};
+
+const checkCategory = (transaction) => {
+	switch (transaction) {
+		case "[ + ] Przychód":
+			categoryIcon = '<ion-icon name="cash"></ion-icon>';
+			break;
+		case "[ - ] Zakupy":
+			categoryIcon = '<ion-icon name="card"></ion-icon>';
+			break;
+		case "[ - ] Jedzenie":
+			categoryIcon = '<ion-icon name="pizza"></ion-icon>';
+			break;
+		case "[ - ] Kino":
+			categoryIcon = '<ion-icon name="videocam"></ion-icon>';
+			break;
+	}
+};
 
 addTransactionBtn.addEventListener("click", openPanel);
 cancelBtn.addEventListener("click", closePanel);
