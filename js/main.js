@@ -123,7 +123,20 @@ const deleteAllTransactions = () => {
 	moneyArr = [0];
 };
 
+const changeToLight = () => {
+	root.style.setProperty("--first-color", "#f9f9f9");
+	root.style.setProperty("--second-color", "#14161f");
+	root.style.setProperty("--border-color", "rgba(0, 0, 0, 0.2)");
+};
+const changeToDark = () => {
+	root.style.setProperty("--first-color", "#14161f");
+	root.style.setProperty("--second-color", "#f9f9f9");
+	root.style.setProperty("--border-color", "rgba(255, 255, 255, 0.4)");
+};
+
 addTransactionBtn.addEventListener("click", openPanel);
 cancelBtn.addEventListener("click", closePanel);
 saveBtn.addEventListener("click", checkForm);
 deleteAllBtn.addEventListener("click", deleteAllTransactions);
+lightStyleBtn.addEventListener("click", changeToLight);
+darkStyleBtn.addEventListener("click", changeToDark);
